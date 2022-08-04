@@ -1,19 +1,20 @@
 function solution(record) {
-    var answer = [];
-    const userId = new Map();
+    const userInfo = new Map();
+    const action = [];
+    const guideMapping = {
+        Enter: '들어왔습니다.', 
+        Leave: '나갔습니다.'
+    };
     
-    record.map((phrase) => saveUser(phrase, userId));
-    const guideString = { Enter: '들어왔습니다.', Leave: '나갔습니다.' };
-    record.map((phrase) => {
-        const word = phrase.split(' ');
-        if (word[0] === 'Change') return;
-        answer.push( userId.get(word[1]) + '님이 ' + guideString[word[0]]);
-    })
-    return answer;
+    record.forEach(phrase => saveMsg(phrase, userInfo, action));
+    
+    return action.map(([guide, id]) => {
+        return `${userInfo.get(id)}님이 ${guideMapping[guide]}`;
+    });;
 }
 
-function saveUser(string, map) {
-    const word = string.split(' ');
-    if (word[0] === 'Leave') return;
-    map.set(word[1], word[2]);
+function saveMsg(string, map, array) {
+    const [guide, id, nick] = string.split(' ');
+    if (guide !== 'Leave') map.set(id, nick);
+    if (guide !== 'Change') array.push([guide, id]);
 }
