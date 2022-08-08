@@ -1,26 +1,11 @@
-function solution(s) {
-    let lengths = [];
-    for (let unit = 1; unit <= s.length / 2; unit++) {
-        let string = '';
-        let repeatedWord;
-        let wordCount = 0;
-        
-        const loopCount = Math.floor(s.length / unit);
-        [...Array(loopCount).keys()].forEach((index) => {
-            const slicedWord = s.slice(index * unit, (index + 1) * unit);
-            if (repeatedWord !== slicedWord) {
-                if (wordCount > 1) string += wordCount;
-                if (repeatedWord) string += repeatedWord;
-                repeatedWord = slicedWord;
-                wordCount = 1;
-            } else if (repeatedWord === slicedWord) wordCount++;
-            if (index === loopCount - 1) {
-                if (wordCount > 1) string += wordCount;
-                string += slicedWord;
-            }
-        });
-        if (s.length % unit) string += s.slice(-s.length % unit);
-        lengths.push(string.length);
-    }
-    return lengths.length ? Math.min(...lengths) : 1;
-}
+const solution = s => {
+  const units = [...Array(Math.floor(s.length / 2))].map((_, index) => index + 1);
+  return units.length ? Math.min(...units.map(unit => compress(s, unit).length)) : 1;
+};
+
+const compress = (s, unit) => {
+  const make = ([r, w, c]) => `${r}${c > 1 ? c : ''}${w}`;
+  return make(chunk(s, unit).reduce(([result, repeatedWord, count], word) => word === repeatedWord ? [result, repeatedWord, count + 1] : [make([result, repeatedWord, count]), word, 1], ['', '', 0]));
+};
+
+const chunk = (str, unit) => str.length <= unit ? [str] : [str.slice(0, unit), ...chunk(str.slice(unit), unit)]; 
