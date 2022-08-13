@@ -1,3 +1,3 @@
 function solution(s) {
-    return [4, 6].some((l) => l === s.length) && ![...s].some(isNaN);
+    return /^\d{6}$|^\d{4}$/.test(s);
 }
