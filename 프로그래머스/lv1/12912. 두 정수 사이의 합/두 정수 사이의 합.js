@@ -1,6 +1,3 @@
 function solution(a, b) {
-    let answer = 0;
-    if (a > b) [a, b] = [b, a];
-    for (let i = a; i <= b; i++) answer += i
-    return answer;
+    return (a + b) * (Math.abs(b - a) + 1) / 2;
 }
