@@ -3,7 +3,7 @@ function solution(n) {
     const num = Array(n - 1).fill(true);
     for (let i = 2; i < n + 1; i++){
         if (!num[i - 2]) continue;
-        for (let j = i * 2; j < n + 1; j += i){
+        for (let j = i * i; j < n + 1; j += i){
             if (!num[j - 2]) continue;
             num[j - 2] = false;
             answer++;
