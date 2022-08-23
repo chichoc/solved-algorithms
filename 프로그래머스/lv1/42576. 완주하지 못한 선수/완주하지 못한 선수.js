@@ -1,6 +1,17 @@
 function solution(participant, completion) {
-    const completeObj = {};
-    completion.forEach(name => completeObj[name] = (completeObj[name] | 0) + 1);
-    return participant.find(name => !completeObj[name]--)
-    // participant.find(name => !completion[name]--, completion.map(name => completion[name] = (completion[name] | 0) + 1))
+    const map = new Map();
+
+    for(let i = 0; i < participant.length; i++) {
+        const a = participant[i];
+        map.set(a, (map.get(a) || 0) + 1);
+        
+        if (i < completion.length) {
+            const b = completion[i];
+            map.set(b, (map.get(b) || 0) - 1);
+        }
+    }
+
+    for(let [k, v] of map) {
+        if(v > 0) return k;
+    }
 }
