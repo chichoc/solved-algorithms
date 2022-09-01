@@ -1,19 +1,10 @@
 function solution(n, lost, reserve) {
-    lost.sort(); reserve.sort();
-    lost.slice().forEach((stu, index) => {
-        if (reserve.includes(stu)) {
-        lost.splice(lost.indexOf(stu), 1);
-        reserve.splice(reserve.indexOf(stu), 1);
-        }
-    });
-    let notBorrowed = lost.length;
-    for (const lostStu of lost){
-        if (!reserve.length) break;
-        const reservedLost = [lostStu - 1, lostStu + 1].find(v => reserve.indexOf(v) !== -1);
-        if (reservedLost) {
-            reserve.splice(reserve.indexOf(reservedLost), 1);
-            notBorrowed--;
-        }
-    }
-    return n - notBorrowed;
+    lost.sort((a, b) => a - b); reserve.sort((a, b) => a - b);
+    const realLost = lost.filter(l => !reserve.includes(l));
+    const realReserve = reserve.filter(r => !lost.includes(r));
+    return n - realLost.filter(lNum => { 
+        const borrowOther = realReserve.find(rNum => Math.abs(rNum - lNum) === 1) 
+        if(!borrowOther) return true;
+        realReserve.splice(realReserve.indexOf(borrowOther), 1);
+    }).length;
 }
