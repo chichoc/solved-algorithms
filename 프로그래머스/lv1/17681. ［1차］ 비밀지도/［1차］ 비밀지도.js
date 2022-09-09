@@ -1,3 +1,17 @@
 function solution(n, arr1, arr2) {
-    return arr1.map((row, index) => (row | arr2[index]).toString(2).padStart(n, 0).replace(/1|0/g, n => +n ? '#' : ' '));
+    let num1, num2, s;
+    let answer = [];
+    
+    for (let i = 0; i < n; i++) {
+        num1 = arr1[i];
+        num2 = arr2[i];
+        s = '';
+        for (let j = 0; j < n; j++) {
+            s = (num1 % 2 || num2 % 2) ? '#' + s : ' ' + s;
+            num1 = Math.floor(num1 / 2);
+            num2 = Math.floor(num2 / 2);
+        }
+        answer.push(s);
+    }    
+    return answer;
 }
