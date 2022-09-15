@@ -1,6 +1,8 @@
 function solution(s) {
-    const sToArray = s.slice(2, -2).split('},{')
-                        .map(str => str.split(','))
+    const sToArray = JSON.parse(s.replace(/{/g, '[').replace(/}/g, ']'))
                         .sort((a, b) => a.length - b.length);
-    return sToArray.reduce((tup, arr) => [...tup, arr.find(elem => !tup.includes(elem))], []).map(x => +x);
+    return sToArray.reduce((tup, arr, index) => {
+        if (index) return [...tup, arr.find(elem => !tup.includes(elem))];
+        return arr;
+    }, []);
 }
