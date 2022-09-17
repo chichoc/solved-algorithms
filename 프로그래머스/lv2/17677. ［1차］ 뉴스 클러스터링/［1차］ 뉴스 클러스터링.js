@@ -2,25 +2,27 @@ function solution(str1, str2) {
     let answer = 0;
     const str1ToArray = strToArray(str1, str1.length);
     const str2ToArray = strToArray(str2, str2.length);
-    if (!str1ToArray.length && !str2ToArray.length) return 65536;
+    const str1ToArrayLen = str1ToArray.length;
+    const str2ToArrayLen = str2ToArray.length;
+    if (!str1ToArrayLen && !str2ToArrayLen) return 65536;
     
-    let multiIntersectionLen = 0, multiUnionLen = 0
-    const union = new Set([...str1ToArray, ...str2ToArray]);
-     for (const slice of union) {
-        const str1Count = str1ToArray.filter(x => x === slice).length;
-        const str2Count = str2ToArray.filter(x => x === slice).length;
-        multiIntersectionLen += Math.min(str1Count, str2Count)
-        multiUnionLen += Math.max(str1Count, str2Count)
-    }
-    answer = multiUnionLen === 0 ? 65536 : Math.floor(multiIntersectionLen / multiUnionLen * 65536)
-    return answer;
+    let interSection = 0;
+    str1ToArray.forEach(str => {
+        const indexInStr2Array = str2ToArray.indexOf(str)
+        if (indexInStr2Array !== -1) {
+            str2ToArray.splice(indexInStr2Array, 1);
+            interSection++;
+        }
+    });
+    answer = interSection / (str1ToArrayLen + str2ToArrayLen - interSection);
+    return Math.floor(answer * 65536);
 }
 
-function strToArray(str, len) { 
+function strToArray(str) { 
     const array = [];
-     for (let i = 0; i < len - 1; i ++) {
+     for (let i = 0; i < str.length - 1; i++) {
          const slicedStr = str.slice(i, i + 2);
-        const onlyAlphabet = /^[a-zA-Z]+$/;
+         const onlyAlphabet = /^[a-zA-Z]+$/;
          if (onlyAlphabet.test(slicedStr)) array.push(slicedStr.toLowerCase());
     }
     return array;
