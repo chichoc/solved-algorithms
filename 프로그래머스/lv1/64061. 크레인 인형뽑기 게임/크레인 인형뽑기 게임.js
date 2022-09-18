@@ -1,17 +1,19 @@
 function solution(board, moves) {
-    const column = [...Array(board[0].length).keys()].map(c => []);
-    board.forEach(row => row.forEach((elem,index) => elem && column[index].push(elem)));
-    let pop = 0;
+    const transpose = board.reduce((result, row) => row.map((elem, i) => elem && [...(result[i] || []), elem]), []);
+    transpose.map(row => row.reverse().filter(el => el));
+    
+    let result = 0;
     const basket = [];
+    
     moves.forEach(c => {
-        if (!column[c - 1].length) return;
-        const doll = column[c - 1].shift();
+        if (!transpose[c - 1].length) return;
+        const doll = transpose[c - 1].pop();
         if (!basket.length) return basket.push(doll);
-        if (doll !== basket.slice(-1)[0]) basket.push(doll);
+        if (doll !== basket[basket.length - 1]) basket.push(doll);
         else {
-            pop += 2;
+            result += 2;
             basket.pop();
         }
     })
-    return pop;
+    return result;
 }
