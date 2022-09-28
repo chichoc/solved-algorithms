@@ -1,39 +1,21 @@
 function solution(board, skill) {
-   const newBoard = [...Array(board.length).keys()].map(e => [...Array(board[0].length)].fill(0));
-    skill.forEach(arr => effect(newBoard, arr));
-    for(let i = 0; i < newBoard.length; i++) {
-        for (let j = 1; j < newBoard.length; j++) {
-            newBoard[i][j] += newBoard[i][j-1];
-        }
+    let answer = 0;
+    const newBoard = Array.from({length: board.length + 2}, () => Array.from({length: board[0].length + 2}, () => 0))
+    
+    for (let [type, r1, c1, r2, c2, deg] of skill) {
+        if (type === 1) deg = -deg;
+        newBoard[r1 + 1][c1 + 1] += deg;
+        newBoard[r2 + 2][c1 + 1] -= deg;
+        newBoard[r1 + 1][c2 + 2] -= deg;
+        newBoard[r2 + 2][c2 + 2] += deg;
     }
     
-    for(let i = 0; i<newBoard.length; i++) {
-        for (let j = 1; j<newBoard.length; j++) {
-            newBoard[j][i] += newBoard[j-1][i];
+    for(let i = 1; i <= board.length; i++) {
+        for (let j = 1; j <= board[0].length; j++) {
+            newBoard[i][j] = newBoard[i][j] + newBoard[i - 1][j] + newBoard[i][j - 1] - newBoard[i - 1][j - 1];
+            board[i - 1][j - 1] += newBoard[i][j];
+            if (board[i - 1][j - 1] >= 1) answer++;
         }
     }
-    
-    for(let i = 0; i < newBoard.length; i++) {
-        for (let j = 0; j < newBoard.length; j++) {
-            board[i][j] += newBoard[i][j];
-        }
-    }
-    // 효율성 테스트 X
-    // skill.forEach(arr => {
-    //     const damage = arr[0] === 1 ? -arr[5] : arr[5];
-    //     for (let i = Math.min(arr[1], arr[3]); i <= Math.max(arr[1], arr[3]); i++) {
-    //      for (let j = Math.min(arr[2], arr[4]); j <= Math.max(arr[2], arr[4]); j++) {
-    //          board[i][j] = board[i][j] + damage;
-    //      }
-    //     }
-    // })
-    return board.reduce((sum, arr) => sum + arr.filter(hp => hp > 0).length, 0)
-}
-
-function effect(board, skill) {
-    const damage = skill[0] === 1 ? -skill[5] : skill[5];
-    board[skill[1]][skill[2]] += damage;
-    if (skill[4] + 1 < board[0].length) board[skill[1]][skill[4] + 1] -= damage;
-    if (skill[3] + 1 < board.length) board[skill[3] + 1][skill[2]] -= damage;
-    if (skill[4] + 1 < board[0].length && skill[3] + 1 < board.length) board[skill[3] + 1][skill[4] + 1] += damage;
+    return answer;
 }
