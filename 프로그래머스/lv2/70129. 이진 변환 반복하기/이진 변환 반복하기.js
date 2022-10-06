@@ -1,9 +1,9 @@
 function solution(s) {
-    const answer = {changeCount: 0, removeCount: 0};
+    const answer = [0, 0];
     while(s !== '1') {
-        answer.removeCount += [...s].filter(s => +s === 0).length;
-        s = s.replaceAll(0, '').length.toString(2);
-        answer.changeCount += 1;
+        answer[0] ++;
+        answer[1] += (s.match(/0/g)||[]).length;
+        s = s.replace(/0/g, '').length.toString(2);   
     }
-    return Object.values(answer);
+    return answer;
 }
