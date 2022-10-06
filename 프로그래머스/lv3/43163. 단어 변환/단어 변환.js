@@ -1,22 +1,22 @@
 function solution(begin, target, words) {
-    const visited = {[begin] : 0};
-    const queue = [begin];
+    if (!words.includes(target)) return 0;
+    const visited = [[begin, 0]];
     
-    while(queue.length) {
-        const curr = queue.shift();
-        if (curr === target) break;
+    while(visited) {
+        const [curr, count] = visited.shift();
+        if (curr === target) return count;
         for (const word of words) {
-            if (isChanged(word, curr) && !visited[word]) {
-                visited[word] = visited[curr] + 1;
-                queue.push(word);
-            }
+            if (!isChanged(word, curr)) continue;
+            visited.push([word, count + 1]);
         }
     }
-    return visited[target] || 0;
 }
 
 function isChanged(word1, word2) {
     let diff = 0;
-    [...word1].forEach((char, index) => word2[index] !== char && diff++)
-    return diff === 1 ? true : false;
+    for (let i = 0; i < word1.length; i++){
+        if (word1[i] !== word2[i]) diff++;
+        if (diff > 1) return false;
+    }
+   return true;
 }
