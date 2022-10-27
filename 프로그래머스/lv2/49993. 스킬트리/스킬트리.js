@@ -1,6 +1,7 @@
+
 function solution(skill, skill_trees) {
     const regex = new RegExp(`[^${skill}]`, 'g');
     return skill_trees
-            .map(e => e.replace(regex, ''))
-            .filter(e => skill.indexOf(e) === 0 || e === '').length;
+        .map((tree) => tree.replace(regex, ''))
+        .reduce((count,replacedTree) => skill.startsWith(replacedTree) ? ++count : count, 0);
 }
