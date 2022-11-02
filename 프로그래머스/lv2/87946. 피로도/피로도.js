@@ -1,12 +1,17 @@
 function solution(k, dungeons) {
     let answer = 0;
-    function bfs(toVisit, count, restK) {
+    const lenD = dungeons.length;
+    const visited = Array(lenD).fill(0);
+    
+    function dfs(count, restK) {
         if (answer < count) answer = count;
-        toVisit.forEach(v => {
-            if (restK < v[0]) return;
-            bfs(toVisit.filter(el => el !== v), count + 1, restK - v[1]);
-        })
+        for (let i = 0; i < lenD; i++) {
+            if (restK < dungeons[i][0] || visited[i]) continue;
+            visited[i] = 1;
+            dfs(count + 1, restK - dungeons[i][1]);
+            visited[i] = 0;
+        }
     }
-    bfs(dungeons, 0, k);
+    dfs(0, k);
     return answer;
 }
