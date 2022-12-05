@@ -1,4 +1,7 @@
 function solution(numbers) {
-    const allNumbers = Array.from({length: 10}, (e, i) => i)
-    return allNumbers.reduce((sum, curr) => numbers.includes(curr) ? sum : sum + curr, 0)
+    let answer = 0;
+    for (let i = 0; i < 10; i++) {
+        if (!numbers.includes(i)) answer += i;
+    }
+    return answer;
 }
