@@ -1,8 +1,11 @@
 function solution(lottos, win_nums) {
-    const rankingOfWinNum = [6, 6, 5, 4, 3, 2, 1];
+    let minWinNum = 0;
+    let countOfZero = 0;
     
-    const minWinNum = lottos.filter(num => win_nums.includes(num)).length;
-    const maxWinNum = minWinNum + lottos.filter(num => !num).length;
+    for (let lotto of lottos) {
+        if (win_nums.includes(lotto)) minWinNum++;
+        else if (lotto === 0) countOfZero++;
+    }
     
-    return [rankingOfWinNum[maxWinNum], rankingOfWinNum[minWinNum]];
+    return [minWinNum + countOfZero, minWinNum].map(num => num > 1 ? 7 - num : 6);
 }
