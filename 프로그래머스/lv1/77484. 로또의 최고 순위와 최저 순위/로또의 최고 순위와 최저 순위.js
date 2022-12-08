@@ -3,8 +3,8 @@ function solution(lottos, win_nums) {
     let countOfZero = 0;
     
     for (let lotto of lottos) {
-        if (win_nums.includes(lotto)) minWinNum++;
-        else if (lotto === 0) countOfZero++;
+        if (lotto === 0) countOfZero++;
+        else if (win_nums.includes(lotto)) minWinNum++;   
     }
     
     return [minWinNum + countOfZero, minWinNum].map(num => num > 1 ? 7 - num : 6);
