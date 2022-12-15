@@ -3,7 +3,6 @@ function solution(price, money, count) {
     for (let i = 1; i < count + 1; i++) {
         sum += price * i;
     }
-    const answer = sum - money;
 
-    return answer > 0 ? answer : 0;
+    return sum > money ? sum - money : 0;
 }
