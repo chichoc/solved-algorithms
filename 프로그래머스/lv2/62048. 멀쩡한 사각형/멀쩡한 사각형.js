@@ -1,9 +1,5 @@
 function solution(w, h) {
-    const slope = h / w;
-    let bottomOfSlope = 0;
-    
-    for (let i = 1; i <= w; i++) {
-        bottomOfSlope += Math.ceil(slope * i);
-    }
-    return (w * h - bottomOfSlope) * 2;
+    const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+    // gcd * ((w/gcd) + (h/gcd) - 1) = w + h - gcd
+    return w * h - (w + h - gcd(w, h));
 }
