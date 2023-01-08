@@ -1,9 +1,9 @@
 function solution(k, tangerine) {
     let answer = 0;
-    const count = new Map();
+    const count = {};
     
-    tangerine.forEach(t => count.set(t, (count.get(t) || 0) + 1));
-    const countOfArray = [...count.values()].sort((a, b) => b - a);
+    tangerine.forEach(t => count[t] = (count[t] || 0) + 1);
+    const countOfArray = Object.values(count).sort((a, b) => b - a);
     
     for (const value of countOfArray) {
         answer++;
