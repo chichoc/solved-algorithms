@@ -1,19 +1,14 @@
 function solution(k, tangerine) {
     let answer = 0;
-    let sum = 0;
     const count = new Map();
     
-    tangerine.forEach(t => {
-        let value = count.get(t) || 0;
-        count.set(t, ++value);
-    });
+    tangerine.forEach(t => count.set(t, (count.get(t) || 0) + 1));
+    const countOfArray = [...count.values()].sort((a, b) => b - a);
     
-    const countOfArray = Array.from(count);
-    countOfArray.sort((a, b) => b[1] - a[1]);
-    
-    for (const [key, value] of countOfArray) {
-        sum += value;
+    for (const value of countOfArray) {
         answer++;
-        if (k <= sum) return answer;
-    } 
+        if (k > value) k -= value;
+        else break;
+    }
+    return answer;
 }
