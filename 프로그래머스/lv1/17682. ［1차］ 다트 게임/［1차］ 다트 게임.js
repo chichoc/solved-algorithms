@@ -1,13 +1,13 @@
 function solution(dartResult) {
-    const scores = [];
-    const bonus = {S : 1, D: 2, T: 3};
-    const num = dartResult.split(/\D/).flatMap(x => !!x ? x : []);
-    const char = dartResult.split(/\d/).flatMap(x => !!x ? x : []);
-    for (let i = 0; i < num.length; i++) {
-        const [b, o] = [...char[i]];
-        const option = o === '*' ? 2 : (o === '#' ? -1 : 1);
-        if (i > 0 && o === '*') scores.push(scores.pop() * 2);
-        scores.push(num[i] ** bonus[b] * option);
+    const bonuses = {S : 1, D: 2, T: 3};
+    const options = {'*': 2, '#': -1, undefined: 1};
+
+    const darts = dartResult.match(/\d.?\D/g);
+    
+    for (let i = 0; i < darts.length; i++) {
+        const [d, s, b, o] = darts[i].match(/(^\d{1,})(S|D|T)(\*|#)?/);
+        if (darts[i - 1] && o === '*') darts[i - 1] *= options[o];
+        darts[i] = s ** bonuses[b] * options[o];
     }
-    return scores.reduce((sum, score) => sum + score, 0);
+    return darts.reduce((sum, score) => sum + score, 0);
 }
