@@ -1,6 +1,5 @@
 function solution(word) {
-    const order = { A: 0, E: 1, I: 2, O: 3, U: 4};
-    return [...word].reduce((sum, char, idx) => sum + 1 + order[char] * (5 ** (5 - idx) - 1) / 4, 0);
+    return [...word].reduce((sum, char, idx) => sum + 1 + 'AEIOU'.indexOf(char) * ~~(781 / 5 ** idx), 0);
 }
 
 // A  AA  AAA  AAAA  AAAAA
