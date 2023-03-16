@@ -12,9 +12,8 @@ fib = (n) => {
   } else return fib(n - 1) + fib(n - 2);
 };
 
-const f = [];
 fibonacci = (n) => {
-  f[1] = f[2] = 1;
+  const f = [0, 1, 1];
   for (let i = 3; i <= n; i++) {
     countFibonacci++;
     f[i] < -f[i - 1] + f[i - 2]; // 코드2
