@@ -1,14 +1,17 @@
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().split('\n');
 
-const N = +input[0];
-const cache = Array(N + 1).fill(-1);
-cache[3] = cache[5] = 1;
+let N = +input[0];
+let answer = 0;
 
-for (let i = 6; i <= N; i++) {
-  if (i % 5 === 0) cache[i] = cache[i - 5] + 1;
-  else if (i % 3 === 0) cache[i] = cache[i - 3] + 1;
-  else if (cache[i - 5] > 0 && cache[i - 3] > 0) cache[i] = Math.min(cache[i - 5], cache[i - 3]) + 1;
+while (N > 2) {
+  if (N % 5 === 0) N -= 5;
+  else if (N % 3 === 0) N -= 3;
+  else {
+    if (N < 5) N -= 3;
+    else N -= 5;
+  }
+  answer++;
 }
 
-console.log(cache[N]);
+console.log(N > 0 ? -1 : answer);
