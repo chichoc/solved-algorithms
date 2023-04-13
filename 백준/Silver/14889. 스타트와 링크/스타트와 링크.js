@@ -1,11 +1,35 @@
 const input = require('fs').readFileSync(0).toString().split('\n');
 const N = +input[0];
 const skills = [];
-const allNums = [...Array(N).keys()];
-let minDiff = 100;
+
+const teamA = [], teamB = [];
+let minDiff = 987654321;
 
 for (let i = 1; i < N + 1; i++) {
   skills.push(input[i].split(' ').map(Number));
+}
+
+makeTeam(0);
+console.log(minDiff);
+
+function makeTeam(count) {
+  if (count === N) {
+    if (teamA.length === N / 2) {
+      const diff = teamCompare(teamA, teamB);
+      if (minDiff > diff) minDiff = diff;
+    }
+    return;
+  }
+  if (teamA.length !== 1 || teamB.length !== N - 1) {
+    if (teamA.length < N / 2) {
+      teamA.push(count);
+      makeTeam(count + 1);
+      teamA.pop();
+    }
+    teamB.push(count);
+    makeTeam(count + 1);
+    teamB.pop();
+  }
 }
 
 function teamCompare(arr1, arr2) {
@@ -20,20 +44,3 @@ function teamCompare(arr1, arr2) {
   }
   return Math.abs(score1 - score2);
 }
-
-function dfs(nums) {
-  if (nums.length === N / 2) {
-    const rest = allNums.filter((key) => !nums.includes(key));
-    const diff = teamCompare(nums, rest);
-    if (minDiff > diff) minDiff = diff;
-  }
-  const lastNum = nums[nums.length - 1];
-  for (let i = lastNum + 1; i < N; i++) {
-    if (nums.includes(i)) continue;
-    dfs([...nums, i]);
-  }
-}
-
-dfs([0]);
-
-console.log(minDiff);
