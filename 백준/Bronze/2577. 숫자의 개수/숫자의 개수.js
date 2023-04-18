@@ -1,7 +1,6 @@
 const input = require('fs').readFileSync(0).toString().split('\n');
-const count = Array(10).fill(0);
+const result = (input[0] * input[1] * input[2]).toString();
 
-const result = Array.from(String(input[0] * input[1] * input[2]), Number);
-result.forEach((digit) => count[digit]++);
-
-console.log(count.join('\n'));
+for (let i = 0; i <= 9; i++) {
+  console.log(result.split(i + '').length - 1);
+}
