@@ -1,8 +1,11 @@
 const N = +require('fs').readFileSync(0).toString().trim();
-const cache = [0, 1, 2];
+let prev1 = 0;
+let prev2 = 1;
+let curr = 0;
 
-for (let i = 3; i <= N; i++) {
-  cache[i] = (cache[i - 1] + cache[i - 2]) % 15746;
+for (let i = 0; i < N; i++) {
+  curr = (prev1 + prev2) % 15746;
+  [prev1, prev2] = [prev2, curr];
 }
 
-console.log(cache[N]);
+console.log(curr);
