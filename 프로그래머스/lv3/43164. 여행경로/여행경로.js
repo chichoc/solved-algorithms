@@ -18,8 +18,6 @@ function solution(tickets) {
     dfs('ICN', 1, ['ICN'], {...arrival});
     
     // 알파벳 순서 비교
-    
-    console.log(answers)
     return getFirstAlphabetically();
     
     
