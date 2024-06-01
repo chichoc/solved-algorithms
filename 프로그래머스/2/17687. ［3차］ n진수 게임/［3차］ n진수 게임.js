@@ -18,8 +18,6 @@ function solution(n, t, m, p) {
         answer += numbers[j];
     }
     
-    console.log(numbers);
-    
     return answer;
 }
 
