@@ -16,6 +16,7 @@ rl.on("line", function(line) {
 });
 
 function solution() {
-	let result = input[0].trim().split(/\s+/).length;
-	console.log(result === 1 ? 0 : result);
+	let trimedInput = input[0].trim();
+	if (trimedInput.length === 0) console.log(0);
+	else console.log(trimedInput.split(/\s+/).length);
 }
