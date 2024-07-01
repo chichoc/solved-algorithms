@@ -42,7 +42,10 @@ function canPassRoad(idx, pos) {
           continue;
         }
       } else {
-        if (rampCount === L) return true; // 디버깅 예제마지막
+        if (rampCount === L) {
+            rampCount = 0;
+            continue;
+        }
         else {
           rampCount = 0;
           return false;
