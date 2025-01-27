@@ -36,6 +36,11 @@ for (let i = 0; i < K; i++) {
     if (isOverBoard(moveToRow, moveToCol, N)) {
       moveToRow = (moveToRow < 0 ? changeNegativeToBoard(moveToRow, N) : moveToRow) % N;
       moveToCol = (moveToCol < 0 ? changeNegativeToBoard(moveToCol, N) : moveToCol) % N;
+
+      // answer -= m;
+      // fireExist[fireIdx] = 0;
+      // 이탈하면 소멸?
+      // continue;
     }
     board[moveToRow][moveToCol].push(fireIdx);
     fireInfos[fireIdx][0] = moveToRow;
@@ -111,3 +116,4 @@ function changeEven(n) {
 }
 
 console.log(answer);
+// 실수: ⌊기호 제대로 안봄 (물론 질량 0 소멸이면 소수점 버려야 함..), 1~N 읽지 않음, 속력 최대값이 1,000이라 참조에러
