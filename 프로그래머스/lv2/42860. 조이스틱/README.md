@@ -1,6 +1,6 @@
-# [level 2] 조이스틱 - 42860 
+# [level 2] 조이스틱 - 42860
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42860) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42860)
 
 ### 성능 요약
 
@@ -61,6 +61,5 @@ ex) 완성해야 하는 이름이 세 글자면 AAA, 네 글자면 AAAA</p>
 
 <p>※ 공지 - 2019년 2월 28일 테스트케이스가 추가되었습니다.<br>
 ※ 공지 - 2022년 1월 14일 지문 수정 및 테스트케이스가 추가되었습니다. 이로 인해 이전에 통과하던 코드가 더 이상 통과하지 않을 수 있습니다.</p>
-
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
