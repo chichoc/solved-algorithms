@@ -25,3 +25,4 @@ function cover(r1, c1, r2, c2) {
 }
 
 console.log(answer);
+// 처음에 통과하지 못한 이유: 크기를 100, 즉 0~99로 설정함 (좌표는 100까지 가질 수 있음)
