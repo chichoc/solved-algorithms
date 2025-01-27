@@ -23,7 +23,9 @@ for (const row of dusts) {
   answer += row.reduce((sum, curr) => sum + curr, 0);
 }
 
-console.log(answer + 2); // 공기청정기 위치값(-1) 두 개 더한 값이니 +2
+// console.log(dusts);
+console.log(answer + 2);
+// 공기청정기 위치값(-1) 두 개 더한 값이니 +2
 
 // 미세먼지 확산
 function spread() {
@@ -35,6 +37,7 @@ function spread() {
       if (dusts[r][c] <= 0) continue;
       const dust = dusts[r][c];
       const numOfSpread = Math.floor(dust / 5);
+      // let count = 0;
       for (let i = 0; i < 4; i++) {
         const [moveToRow, moveToCol] = [r + spreadRow[i], c + spreadCol[i]];
 
@@ -42,8 +45,11 @@ function spread() {
         // 공기청정기가 있는 칸은 확산X
         if (dusts[moveToRow][moveToCol] === -1) continue;
         spreadDusts.push([moveToRow, moveToCol, numOfSpread]);
+        // dusts[moveToRow][moveToCol] += numOfSpread;
         dusts[r][c] -= numOfSpread;
+        // count++;
       }
+      // dusts[r][c] = dust - numOfSpread * count;
     }
   }
   for (const [row, col, amount] of spreadDusts) {
