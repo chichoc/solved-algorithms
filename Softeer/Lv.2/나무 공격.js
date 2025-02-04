@@ -14,14 +14,7 @@ function attack([startRow, endRow]) {
 }
 
 function countTargets(array) {
-  let result = 0;
-  for (let row = 0; row < n; row++) {
-    for (let col = 0; col < m; col++) {
-      if (array[row][col] === 0) continue;
-      result++;
-    }
-  }
-  return result;
+  return array.reduce((count, row) => count + row.filter((cell) => cell === 1).length, 0);
 }
 
 for (const attackRange of attackSpaces) {
