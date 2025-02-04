@@ -1,3 +1,4 @@
+// https://softeer.ai/practice/7698
 const inputs = require('fs').readFileSync(0).toString().trim().split('\n');
 const T = +inputs[0];
 const fiveUnit = '++++ ';

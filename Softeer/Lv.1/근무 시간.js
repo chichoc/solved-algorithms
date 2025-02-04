@@ -1,3 +1,4 @@
+// https://softeer.ai/practice/6254
 const inputs = require('fs').readFileSync(0).toString().trim().split('\n');
 let answer = 0;
 
