@@ -6,16 +6,14 @@ let answer = 0;
 let minDiff = Infinity;
 
 for (let i = 0; i < n - 1; i++) {
-  for (let j = i + 1; j < i + 2; j++) {
-    const diff = positions[j] - positions[i];
-    if (diff < minDiff) {
-      answer = 1;
-      minDiff = diff;
-    } else if (diff > minDiff) {
-      continue;
-    } else {
-      answer += 1;
-    }
+  const diff = positions[i + 1] - positions[i];
+  if (diff < minDiff) {
+    answer = 1;
+    minDiff = diff;
+  } else if (diff > minDiff) {
+    continue;
+  } else {
+    answer += 1;
   }
 }
 
