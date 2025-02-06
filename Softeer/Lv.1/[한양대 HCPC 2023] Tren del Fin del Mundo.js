@@ -1,12 +1,11 @@
 // https://softeer.ai/practice/7695
-const inputs = require('fs').readFileSync(0).toString().toString().split('\n');
+const inputs = require('fs').readFileSync(0).toString().split('\n');
 const N = +inputs[0];
+let minY = Infinity;
+let answer = '';
 
-let minY = +inputs[1].split(' ')[1];
-let answer = inputs[1];
-
-for (let i = 2; i <= N; i++) {
-  const [x, y] = inputs[i].split(' ').map(Number);
+for (let i = 1; i <= N; i++) {
+  const y = +inputs[i].split(' ')[1];
 
   if (y > minY) continue;
   minY = y;
