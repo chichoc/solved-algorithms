@@ -2,7 +2,7 @@
 const inputs = require('fs').readFileSync(0).toString().trim().split('\n');
 const testCases = inputs.slice(1).map((input) => input.split(' '));
 const answer = [];
-const numbersSwitch = {
+const digitPatterns = {
   '*': [0, 0, 0, 0, 0, 0, 0],
   0: [1, 1, 0, 1, 1, 1, 1],
   1: [0, 1, 0, 0, 1, 0, 0],
@@ -16,17 +16,26 @@ const numbersSwitch = {
   9: [1, 1, 1, 1, 1, 1, 0],
 };
 
-for (const [num1, num2] of testCases) {
+function comparePatterns(digit1, digit2) {
+  const pattern1 = digitPatterns[digit1];
+  const pattern2 = digitPatterns[digit2];
+  return pattern1.filter((elem, idx) => elem !== pattern2[idx]).length;
+}
+
+function countSwitches(num1, num2) {
   const light1 = num1.padStart(5, '*');
   const light2 = num2.padStart(5, '*');
-  let totalSwitching = 0;
+  let totalSwitches = 0;
 
   for (let i = 0; i < 5; i++) {
     if (light1[i] === light2[i]) continue;
-    const switching = numbersSwitch[light1[i]].filter((elem, idx) => elem !== numbersSwitch[light2[i]][idx]).length;
-    totalSwitching += switching;
+    totalSwitches += comparePatterns(light1[i], light2[i]);
   }
-  answer.push(totalSwitching);
+  return totalSwitches;
+}
+
+for (const [num1, num2] of testCases) {
+  answer.push(countSwitches(num1, num2));
 }
 
 console.log(answer.join('\n'));
