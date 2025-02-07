@@ -8,35 +8,34 @@ const inputs = require('fs')
 const [n, m] = inputs[0];
 const board = inputs.slice(1, n + 1);
 const positions = inputs.slice(n + 1).map(([row, col]) => [row - 1, col - 1]);
-const [startRow, startCol] = positions[0];
-const moveRow = [1, -1, 0, 0];
-const moveCol = [0, 0, -1, 1];
+const dRow = [1, -1, 0, 0];
+const dCol = [0, 0, -1, 1];
 let answer = 0;
 
-function checkPossible(row, col) {
+function isValidMove(row, col) {
   if (row < 0 || row >= n || col < 0 || col >= n) return false;
   if (board[row][col] === 1) return false;
   return true;
 }
 
-function dfs(currRow, currCol, visited, stack) {
-  const visitedCopy = visited.map((row) => row.slice());
-  const stackCopy = stack.map((pos) => pos.slice());
-
-  visitedCopy[currRow][currCol] = true;
-
-  if (stack[0][0] === currRow && stack[0][1] === currCol) stackCopy.shift();
-  if (stackCopy.length === 0) return answer++;
+function dfs(currRow, currCol, posIdx) {
+  if (posIdx === m) return answer++;
+  if (positions[posIdx][0] === currRow && positions[posIdx][1] === currCol) return dfs(currRow, currCol, posIdx + 1);
 
   for (let i = 0; i < 4; i++) {
-    const [newRow, newCol] = [currRow + moveRow[i], currCol + moveCol[i]];
-    if (!checkPossible(newRow, newCol) || visitedCopy[newRow][newCol]) continue;
-    dfs(newRow, newCol, visitedCopy, stackCopy);
+    const [newRow, newCol] = [currRow + dRow[i], currCol + dCol[i]];
+    if (!isValidMove(newRow, newCol) || visited[newRow][newCol]) continue;
+
+    visited[newRow][newCol] = true;
+    dfs(newRow, newCol, posIdx);
+    visited[newRow][newCol] = false;
   }
 }
 
-const visitedBoard = Array.from({ length: n }, () => Array(n).fill(false));
-dfs(startRow, startCol, visitedBoard, positions);
+const visited = Array.from({ length: n }, () => Array(n).fill(false));
+const [startRow, startCol] = positions[0];
+visited[startRow][startCol] = true;
+dfs(startRow, startCol, 0);
 
 console.log(answer);
 
@@ -45,5 +44,4 @@ console.log(answer);
  * 에러1 - 문제에서 주어진 입력값 중 칸의 위치가 1부터 시작하는 것을 놓침
  * 에러2 - stack을 복사하지 않고 그대로 사용하여 stack이 비어있는 경우 발생
  * 결과값 다름 - visited를 복사하지 않아 제대로 순회하지 못함
- *
  */
