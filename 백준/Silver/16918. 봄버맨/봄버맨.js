@@ -1,46 +1,56 @@
-const inputs = require('fs').readFileSync(0).toString().trim().split('\n');
+const inputs = require('fs').readFileSync(0).toString().trim().split('\n'); // 입력 여러 줄
 const [R, C, N] = inputs[0].split(' ').map(Number);
-const board = inputs.slice(1).map((input) => input.split(''));
-const prevBomb = [];
-const space = '.';
-const bomb = 'O';
-const evenBoard = Array.from({ length: R }, () => bomb.repeat(C));
-const directRow = [1, -1, 0, 0];
-const directCol = [0, 0, 1, -1];
+const grid = inputs.slice(1).map((row) => row.split(''));
+const dx = [0, 0, -1, 1];
+const dy = [1, -1, 0, 0];
 
-function isOverBoard(r, c) {
-  if (r < 0 || r >= R || c < 0 || c >= C) return true;
-  return false;
+function accessibleBoard(row, col) {
+  if (row < 0 || row >= R || col < 0 || col >= C) return false;
+  return true;
 }
 
-function checkBomb() {
+function playBomb() {
   for (let row = 0; row < R; row++) {
     for (let col = 0; col < C; col++) {
-      if (board[row][col] === space) continue;
-      prevBomb.push([row, col]);
+      if (grid[row][col] === '.') continue;
+      if (grid[row][col] > 0) {
+        grid[row][col]--;
+      } else if (grid[row][col] === 0) {
+        grid[row][col] = '.';
+        for (let i = 0; i < dx.length; i++) {
+          const injectRow = row + dx[i];
+          const injectCol = col + dy[i];
+          if (!accessibleBoard(injectRow, injectCol)) continue;
+          if (grid[injectRow][injectCol] === 0) continue;
+          grid[injectRow][injectCol] = '.';
+        }
+      }
     }
   }
 }
 
-function explodeBomb() {
-  board.forEach((_, idx) => (board[idx] = Array(C).fill(bomb)));
-
-  for (const [row, col] of prevBomb) {
-    board[row][col] = space;
-    for (let i = 0; i < 4; i++) {
-      const [adjacentRow, adjacentCol] = [row + directRow[i], col + directCol[i]];
-      if (isOverBoard(adjacentRow, adjacentCol)) continue;
-      board[adjacentRow][adjacentCol] = space;
+function putBomb() {
+  for (let row = 0; row < R; row++) {
+    for (let col = 0; col < C; col++) {
+      if (grid[row][col] === '.') grid[row][col] = 2;
     }
   }
-  prevBomb.length = 0;
 }
 
-if (N % 2 === 0) return console.log(evenBoard.join('\n'));
-
-for (let i = 0; i < N; i += 2) {
-  if (i > 0) explodeBomb();
-  checkBomb();
+// 기호 변경
+for (let row = 0; row < R; row++) {
+  for (let col = 0; col < C; col++) {
+    if (grid[row][col] === '.') continue;
+    grid[row][col] = 2;
+  }
 }
 
-console.log(board.map((row) => row.join('')).join('\n'));
+// N초 후
+for (let n = 0; n < N; n++) {
+  // 0인 폭탄 폭발
+  playBomb();
+  // 설치되어 있지 않은 모든 칸에 폭탄 설치
+  if (n % 2 === 1) putBomb();
+}
+
+console.log(grid.map((row) => row.map((col) => (typeof col === 'number' ? 'O' : '.')).join('')).join('\n'));
