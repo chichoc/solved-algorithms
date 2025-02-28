@@ -2,14 +2,17 @@ function solution(word, pages) {
     let answer = 0;
     const pageLen = pages.length;
     const pageNames = Array(pageLen).fill('');
-    // const pageInfos = Array.from({length: pageLen}, () => {})
     const pageInfos = Array.from({length: pageLen}, () => ({inners:[]}))
     const matchingScore = [];
+    
+    function findTag(body, tagName) {
+        const regex = new RegExp(`<${tagName}[^>]+>`, 'g')
+        return body.match(regex)
+    }
     
     function findAttr(meta, attribute) {
         const regex = new RegExp(`${attribute}="([^"]+)"`)
         const match = meta.match(regex);
-        // console.log(meta, match)
         return match ? match[1].replace('https://', '') : null;
     }
     
@@ -18,11 +21,9 @@ function solution(word, pages) {
         const result = body.match(regex);
         return result ? result.length : 0;
     }
-    // console.log(checkDefaultScore('0muzi0muzi0'))
     
     function findLinks(body) {
-        const regexA = /<a[^>]+>/g;
-        const aTags = body.match(regexA);
+        const aTags = findTag(body, 'a');
         return aTags?.map(tag => findAttr(tag, 'href')) || [];
     }
     
@@ -32,8 +33,7 @@ function solution(word, pages) {
     
     for (let i = 0; i < pageLen; i++) {
         // 웹페이지 url 찾기 (meta 태그의 content 속성)
-        const regexMeta = /<meta[^>]+>/g;
-        const metaTags = pages[i].match(regexMeta);
+        const metaTags = findTag(pages[i], 'meta');
         metaTags.forEach(tag => {
             if (!tag.includes('content')) return true;
             pageNames[i] = findAttr(tag, 'content');
@@ -61,6 +61,5 @@ function solution(word, pages) {
         matchingScore.push(score);
     }
     
-    // console.log(pageNames, pageInfos, matchingScore)
     return matchingScore.indexOf(Math.max(...matchingScore))
 }
