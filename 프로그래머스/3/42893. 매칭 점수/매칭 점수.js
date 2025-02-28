@@ -1,5 +1,4 @@
 function solution(word, pages) {
-    let answer = 0;
     const pageLen = pages.length;
     const pageNames = Array(pageLen).fill('');
     const pageInfos = Array.from({length: pageLen}, () => ({inners:[]}))
