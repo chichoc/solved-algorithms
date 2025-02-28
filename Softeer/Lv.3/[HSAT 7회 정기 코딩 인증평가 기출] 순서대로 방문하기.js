@@ -44,5 +44,5 @@ console.log(answer);
  * 에러1 - 문제에서 주어진 입력값 중 칸의 위치가 1부터 시작하는 것을 놓침
  * 에러2 - stack을 복사하지 않고 그대로 사용하여 stack이 비어있는 경우 발생
  * 결과값 다름 - visited를 복사하지 않아 제대로 순회하지 못함
- * 개선시 참고한 풀이: https://velog.io/@youhyeoneee/%EC%86%8C%ED%94%84%ED%8B%B0%EC%96%B4-%EC%88%9C%EC%84%9C%EB%8C%80%EB%A1%9C-%EB%B0%A9%EB%AC%B8%ED%95%98%EA%B8%B0
+ * 개선시 참고한 풀이: https://velog.io/@youhyeoneee/소프티어-순서대로-방문하기
  */
