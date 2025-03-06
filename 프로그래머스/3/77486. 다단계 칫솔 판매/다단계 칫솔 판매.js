@@ -9,9 +9,7 @@ function solution(enroll, referral, seller, amount) {
         return [pay - charge, charge];
     }
     
-    function checkBenefit(name, pay) {
-        if (!enroll.includes(name)) return;
-        
+    function checkBenefit(name, pay) {        
         const [benefit, charge] = calculateBenefit(pay);
         answer[name] += benefit;
         if (charge === 0) return;
