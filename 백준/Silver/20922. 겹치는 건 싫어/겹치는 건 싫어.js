@@ -1,21 +1,22 @@
 const inputs = require('fs').readFileSync(0).toString().trim().split('\n');
 const [N, K] = inputs[0].split(' ').map(Number);
 const nums = inputs[1].split(' ').map(Number);
+
 const count = Array(100001).fill(0);
-let set = [];
+let left = 0;
+let right = 0;
 let maxLen = 0;
 
-for (let i = 0; i < N; i++) {
-  const targetNum = nums[i];
-  set.push(targetNum);
-  count[targetNum]++;
-
-  while (count[targetNum] > K) {
-    const adjacentNum = set.indexOf(targetNum);
-    set.slice(0, adjacentNum + 1).forEach((num) => count[num]--);
-    set = set.slice(adjacentNum + 1);
+while (right < N) {
+  if (count[nums[right]] + 1 <= K) {
+    count[nums[right]]++;
+    right++;
+  } else {
+    count[nums[left]]--;
+    left++;
   }
-  maxLen = Math.max(maxLen, set.length);
+
+  maxLen = Math.max(maxLen, right - left);
 }
 
 console.log(maxLen);
