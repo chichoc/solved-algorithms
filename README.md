@@ -218,6 +218,7 @@
 | 문제 번호 | 문제 이름 | 난이도 | 출처 | 비고 |
 | --- | :-: | --: | --- | --- |
 | 15565 | \*#[귀여운 라이언](https://github.com/chichoc/solved-algorithms/tree/f1c4e9bfa29d8933066d835941099fe5fc210589/%EB%B0%B1%EC%A4%80/Silver/15565.%E2%80%85%EA%B7%80%EC%97%AC%EC%9A%B4%E2%80%85%EB%9D%BC%EC%9D%B4%EC%96%B8) | Silver 1 | [백준](https://www.acmicpc.net/problem/15565) |  |
+| 20922 | \*#[겹치는 건 싫어](https://github.com/chichoc/solved-algorithms/tree/52c96151dfea5b260e87a46f2c14d7d9bede30c5/%EB%B0%B1%EC%A4%80/Silver/20922.%E2%80%85%EA%B2%B9%EC%B9%98%EB%8A%94%E2%80%85%EA%B1%B4%E2%80%85%EC%8B%AB%EC%96%B4) | Silver 1 | [백준](https://www.acmicpc.net/problem/20922) |  |
 
 ## 우선순위 큐 <a id="7"></a>
 
