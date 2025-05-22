@@ -3,7 +3,6 @@ T = int(input())
 for test_case in range(1, T + 1):
     input()
     nums = list(map(int, input().split()))
-    nums.sort()
     nums_type = set(nums)
 
     maxCount = 0
