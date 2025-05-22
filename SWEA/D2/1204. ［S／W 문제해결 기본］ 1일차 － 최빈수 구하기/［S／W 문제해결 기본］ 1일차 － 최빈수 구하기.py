@@ -10,7 +10,10 @@ for test_case in range(1, T + 1):
     answer = 0
     for num in nums_type:
         result = nums.count(num)
-        if result >= maxCount:
+        if result > maxCount:
             maxCount = result
             answer = num
+        elif result == maxCount:
+            if num > answer:
+                answer = num
     print(f'#{test_case} {answer}')
