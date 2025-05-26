@@ -195,6 +195,7 @@
 | 9184 | [신나는 함수 실행](https://github.com/chichoc/solved-algorithms/tree/28ad974ceb8a3666cd9a1e03e50153e442ce33e9/%EB%B0%B1%EC%A4%80/Silver/9184.%E2%80%85%EC%8B%A0%EB%82%98%EB%8A%94%E2%80%85%ED%95%A8%EC%88%98%E2%80%85%EC%8B%A4%ED%96%89) | Silver 2 | [백준](https://www.acmicpc.net/problem/9184) [동적계획법1](https://www.acmicpc.net/step/16) [pacnw1999](https://www.acmicpc.net/category/detail/1106) |
 | 1149 | @\*#[RGB거리](https://github.com/chichoc/solved-algorithms/tree/80406929907f2cbfb8474ee3933030ce3c29b8d4/%EB%B0%B1%EC%A4%80/Silver/1149.%E2%80%85RGB%EA%B1%B0%EB%A6%AC#silver-i-rgb%EA%B1%B0%EB%A6%AC---1149) | Silver 1 | [백준](hhttps://www.acmicpc.net/problem/1149) | [참고한 풀이](https://junghyeonsu.tistory.com/201) |
 | 1309 | [동물원](https://github.com/chichoc/solved-algorithms/tree/ee728a9a515972f6725270352e72ced284241bb5/%EB%B0%B1%EC%A4%80/Silver/1309.%E2%80%85%EB%8F%99%EB%AC%BC%EC%9B%90) | Silver 1 | [백준](https://www.acmicpc.net/problem/1309) [다이나믹 프로그래밍](https://www.acmicpc.net/problemset?sort=ac_desc&algo=25) | [참고한 풀이](https://parkparkpark.tistory.com/135) |
+| 5582 | \*#[공통 부분 문자열](https://github.com/chichoc/solved-algorithms/blob/54337837ed11bd25a485ff2d7a90448931f952c1/%EB%B0%B1%EC%A4%80/Gold/5582.%E2%80%85%EA%B3%B5%ED%86%B5%E2%80%85%EB%B6%80%EB%B6%84%E2%80%85%EB%AC%B8%EC%9E%90%EC%97%B4/%EA%B3%B5%ED%86%B5%E2%80%85%EB%B6%80%EB%B6%84%E2%80%85%EB%AC%B8%EC%9E%90%EC%97%B4.js) | Gold 5 | [백준](https://www.acmicpc.net/problem/5582) | [참고한 풀이](https://dailylifeofdeveloper.tistory.com/114) |
 
 ## 분할정복 <a id="5"></a>
 
