@@ -11,7 +11,7 @@
 - [완전탐색](#3)
 - [DP](#4)
 - [분할정복](#5)
-- [투포인터](#6)
+- [슬라이딩 윈도우||투포인터](#6)
 - [우선순위 큐](#7)
 - [그래프](#8)
 - [SQL](#9)
@@ -215,10 +215,11 @@
 | 1654 | \*[랜선 자르기](https://github.com/chichoc/solved-algorithms/tree/7e53d84982129f136f550fee2a5e70d25bcb581e/%EB%B0%B1%EC%A4%80/Silver/1654.%E2%80%85%EB%9E%9C%EC%84%A0%E2%80%85%EC%9E%90%EB%A5%B4%EA%B8%B0) | Silver 2 | [백준](https://www.acmicpc.net/problem/1654) [이분 탐색](https://www.acmicpc.net/problemset?sort=ac_desc&algo=12) |
 | 12738 | @\*#[가장 긴 증가하는 부분 수열 3](https://github.com/chichoc/solved-algorithms/tree/fc94f79ae296dcf466d5e08eb968e9cd44283c90/%EB%B0%B1%EC%A4%80/Gold/12738.%E2%80%85%EA%B0%80%EC%9E%A5%E2%80%85%EA%B8%B4%E2%80%85%EC%A6%9D%EA%B0%80%ED%95%98%EB%8A%94%E2%80%85%EB%B6%80%EB%B6%84%E2%80%85%EC%88%98%EC%97%B4%E2%80%8530) | Gold 2 | [백준](https://www.acmicpc.net/problem/12738) [이분 탐색](https://www.acmicpc.net/problemset?sort=ac_desc&algo=12) | [참고한 풀이](https://velog.io/@arthur/12738.-%EA%B0%80%EC%9E%A5-%EA%B8%B4-%EC%A6%9D%EA%B0%80%ED%95%98%EB%8A%94-%EB%B6%80%EB%B6%84-%EC%88%98%EC%97%B4-3-node.js-javascript) |
 
-## 투포인터 <a id="6"></a>
+## 슬라이딩 윈도우||투포인터 <a id="6"></a>
 
 | 문제 번호 | 문제 이름 | 난이도 | 출처 | 비고 |
 | --- | :-: | --: | --- | --- |
+| 2531 | \#[회전 초밥](https://github.com/chichoc/solved-algorithms/tree/0ba795487b4c27f818de66267c4d576150f39f1a/%EB%B0%B1%EC%A4%80/Silver/2531.%E2%80%85%ED%9A%8C%EC%A0%84%E2%80%85%EC%B4%88%EB%B0%A5) | Silver 1 | [백준](https://www.acmicpc.net/problem/2531) |  |
 | 15565 | \*#[귀여운 라이언](https://github.com/chichoc/solved-algorithms/tree/f1c4e9bfa29d8933066d835941099fe5fc210589/%EB%B0%B1%EC%A4%80/Silver/15565.%E2%80%85%EA%B7%80%EC%97%AC%EC%9A%B4%E2%80%85%EB%9D%BC%EC%9D%B4%EC%96%B8) | Silver 1 | [백준](https://www.acmicpc.net/problem/15565) |  |
 | 20922 | \*#[겹치는 건 싫어](https://github.com/chichoc/solved-algorithms/tree/52c96151dfea5b260e87a46f2c14d7d9bede30c5/%EB%B0%B1%EC%A4%80/Silver/20922.%E2%80%85%EA%B2%B9%EC%B9%98%EB%8A%94%E2%80%85%EA%B1%B4%E2%80%85%EC%8B%AB%EC%96%B4) | Silver 1 | [백준](https://www.acmicpc.net/problem/20922) |  |
 
