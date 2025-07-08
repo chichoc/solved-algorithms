@@ -12,14 +12,16 @@ function dijkstra(start) {
   const dist = Array(V).fill(Infinity);
   dist[start] = 0;
   const pq = [[0, start]];
+
   while (pq.length) {
-    pq.sort((a, b) => a[0] - b[0]);
     const [cost, node] = pq.shift();
     if (dist[node] < cost) continue;
-    for (const [nextNode, nextCost] of graph[node]) {
-      if (dist[nextNode] <= dist[node] + nextCost) continue;
-      dist[nextNode] = dist[node] + nextCost;
-      pq.push([dist[nextNode], nextNode]);
+
+    for (const [nextNode, weight] of graph[node]) {
+      const nextCost = dist[node] + weight;
+      if (nextCost >= dist[nextNode]) continue;
+      dist[nextNode] = nextCost;
+      pq.push([nextCost, nextNode]);
     }
   }
   return dist;
@@ -28,8 +30,4 @@ function dijkstra(start) {
 const distFromStart = dijkstra(0);
 const distFromP = dijkstra(P - 1);
 
-const dist1toV = distFromStart[V - 1];
-const dist1toP = distFromStart[P - 1];
-const distPtoV = distFromP[V - 1];
-
-console.log(dist1toV === dist1toP + distPtoV ? 'SAVE HIM' : 'GOOD BYE');
+console.log(distFromStart[V - 1] === distFromStart[P - 1]+ distFromP[V - 1] ? 'SAVE HIM' : 'GOOD BYE');
