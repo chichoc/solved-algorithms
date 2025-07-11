@@ -17,6 +17,7 @@ function lcs(s1, s2) {
 
   let i1 = len1, i2 = len2;
   while (i1 > 0 && i2 > 0) {
+    if (dp[i1][i2] === 0) break;
     if (s1[i1 - 1] === s2[i2 - 1]) {
       result.push(s1[i1 - 1]);
       i1--;
