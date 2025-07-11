@@ -1,14 +1,17 @@
 const [s1, s2] = require('fs').readFileSync(0).toString().trim().split('\n');
 const len1 = s1.length,len2 = s2.length;
-const dp = Array.from({ length: len1 + 1 }, () => Array(len2 + 1).fill(0));
 
 function lcs(s1, s2) {
+  const dp = Array.from({ length: len1 + 1 }, () => Array(len2 + 1).fill(0));
   const result = [];
 
-  for (let i = 1; i < len1 + 1; i++) {
-    for (let j = 1; j < len2 + 1; j++) {
-      if (s1[i - 1] === s2[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;
-      else dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+  for (let i = 1; i <= len1; i++) {
+    for (let j = 1; j <= len2; j++) {
+      if (s1[i - 1] === s2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
+      } else {
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+      }
     }
   }
 
