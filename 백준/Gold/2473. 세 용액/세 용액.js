@@ -15,10 +15,10 @@ for (let i = 0; i < N - 2; i++) {
   while (left < right) {
     const num2 = nums[left], num3 = nums[right];
     const sum = num1 + num2 + num3;
-    if (Math.abs(sum) < Math.abs(answerSum)) {
+    if (Math.abs(sum) < answerSum) {
       answerNums.length = 0;
       answerNums.push(num1, num2, num3);
-      answerSum = sum;
+      answerSum = Math.abs(sum);
     }
     if (sum === 0) break;
     else if (sum < 0) left++;
