@@ -4,7 +4,7 @@ const nums = inputs[1]
   .split(' ')
   .map(Number)
   .sort((a, b) => a - b);
-const answerNums = Array(3).fill(0);
+const answerNums = Array(3);
 let answerSum = Infinity;
 
 for (let i = 0; i < N - 2; i++) {
