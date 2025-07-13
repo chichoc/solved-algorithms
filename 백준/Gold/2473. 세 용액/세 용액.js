@@ -20,8 +20,7 @@ for (let i = 0; i < N - 2; i++) {
       answerNums.push(num1, num2, num3);
       answerSum = Math.abs(sum);
     }
-    if (sum === 0) break;
-    else if (sum < 0) left++;
+    if (sum < 0) left++;
     else right--;
   }
   if (answerSum === 0) break;
