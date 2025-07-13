@@ -4,7 +4,7 @@ const nums = inputs[1]
   .split(' ')
   .map(Number)
   .sort((a, b) => a - b);
-const answerNums = [];
+const answerNums = Array(3).fill(0);
 let answerSum = Infinity;
 
 for (let i = 0; i < N - 2; i++) {
@@ -16,14 +16,14 @@ for (let i = 0; i < N - 2; i++) {
     const num2 = nums[left], num3 = nums[right];
     const sum = num1 + num2 + num3;
     if (Math.abs(sum) < answerSum) {
-      answerNums.length = 0;
-      answerNums.push(num1, num2, num3);
+      answerNums[0] = num1;
+      answerNums[1] = num2;
+      answerNums[2] = num3;
       answerSum = Math.abs(sum);
     }
     if (sum < 0) left++;
     else right--;
   }
-  if (answerSum === 0) break;
 }
 
 console.log(answerNums.join(' '));
