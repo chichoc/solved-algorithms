@@ -1,4 +1,4 @@
-const inputs = require('fs').readFileSync(0).toString().trim().split('\n');
+const inputs = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
 const N = +inputs[0];
 const A = [], B = [], C = [], D = [];
 
