@@ -3,11 +3,11 @@ const N = +inputs[0];
 const A = [], B = [], C = [], D = [];
 
 for (let i = 1; i <= N; i++) {
-  const [a, b, c, d] = inputs[i].split(' ').map(Number);
-  A.push(a);
-  B.push(b);
-  C.push(c);
-  D.push(d);
+  const nums = inputs[i].split(' ').map(Number);
+  A.push(nums[0]);
+  B.push(nums[1]);
+  C.push(nums[2]);
+  D.push(nums[3]);
 }
 
 const AB = new Map();
