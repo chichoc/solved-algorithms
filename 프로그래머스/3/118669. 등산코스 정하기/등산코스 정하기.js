@@ -1,41 +1,31 @@
+// 2022.11.18
 function solution(n, paths, gates, summits) {
-    const graph = Array.from({length: n + 1}, () => []);
-    const isSummit = new Set(summits);
-    const isGate = new Set(gates);
-    
-    paths.forEach(([a, b, w]) => {
-        graph[a].push([b, w]);
-        graph[b].push([a, w]);
+    const nodesOfPath = Array.from({length: n + 1}, _ => []);
+    paths.forEach(([i, j, w]) => {
+        nodesOfPath[i].push([j, w]);
+        nodesOfPath[j].push([i, w]);
     });
     
-    const intensity = Array(n + 1).fill(Infinity);
-    let queue = [...gates];
+    for (const summit of summits) nodesOfPath[summit] = [];
     
-    gates.forEach(gate => intensity[gate] = 0);
+    let queue = gates;
+    const intensities = Array.from({length: n + 1}, _ => 100000000);
+    gates.forEach(g => intensities[g] = -1);
     
-    while (queue.length > 0) {
-        const nextQueue = [];
-        
-        for (const current of queue) {
-            for (const [next, weight] of graph[current]) {
-                if (isGate.has(next)) continue;
-                
-                const newIntensity = Math.max(intensity[current], weight);
-                
-                if (newIntensity < intensity[next]) {
-                    intensity[next] = newIntensity;
-                    
-                    if (!isSummit.has(next)) {
-                        nextQueue.push(next);
-                    }
-                }
+    while(queue.length > 0) {
+        const set = new Set();
+        while(queue.length > 0) {
+            const gateOfQueue = queue.pop();
+            for (const [v, w] of nodesOfPath[gateOfQueue]){
+                const maxV = Math.max(intensities[gateOfQueue], w)
+                if (intensities[v] > maxV){
+                    intensities[v] = maxV;
+                    set.add(v);
+                }   
             }
         }
-        
-        queue = [...new Set(nextQueue)];
+        queue = [...set];
     }
     
-    return summits
-        .map(s => [s, intensity[s]])
-        .sort((a, b) => a[1] === b[1] ? a[0] - b[0] : a[1] - b[1])[0];
+    return summits.map(s => [s, intensities[s]]).sort((a, b) => a[1] === b[1] ? a[0] - b[0] : a[1] - b[1])[0];
 }
