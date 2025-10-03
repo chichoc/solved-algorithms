@@ -1,30 +1,23 @@
-// 2022.11.18
 function solution(n, paths, gates, summits) {
-    const nodesOfPath = Array.from({length: n + 1}, _ => []);
-    paths.forEach(([i, j, w]) => {
-        nodesOfPath[i].push([j, w]);
-        nodesOfPath[j].push([i, w]);
-    });
-    
-    for (const summit of summits) nodesOfPath[summit] = [];
+    const graph = Array.from({length: n + 1}, _ => []);
+    paths.forEach(([i, j, w]) => (graph[i].push([j, w]), graph[j].push([i, w])))
     
     let queue = gates;
-    const intensities = Array.from({length: n + 1}, _ => 100000000);
-    gates.forEach(g => intensities[g] = -1);
+    const intensities = Array.from({length: n + 1}, _ => 10000001);
+    gates.forEach(g => intensities[g] = 0);
     
     while(queue.length > 0) {
-        const set = new Set();
-        while(queue.length > 0) {
-            const gateOfQueue = queue.pop();
-            for (const [v, w] of nodesOfPath[gateOfQueue]){
-                const maxV = Math.max(intensities[gateOfQueue], w)
+        const nq = [];
+        for (const node of queue) {
+            for (const [v, w] of graph[node]){
+                const maxV = Math.max(intensities[node], w)
                 if (intensities[v] > maxV){
                     intensities[v] = maxV;
-                    set.add(v);
+                    if (!summits.includes(v)) nq.push(v)
                 }   
             }
         }
-        queue = [...set];
+        queue = [...nq];
     }
     
     return summits.map(s => [s, intensities[s]]).sort((a, b) => a[1] === b[1] ? a[0] - b[0] : a[1] - b[1])[0];
