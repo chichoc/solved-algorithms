@@ -8,13 +8,13 @@ function solution(n, paths, gates, summits) {
     gates.forEach(g => intensities[g] = 0);
     
     while(queue.length > 0) {
-        const nextQueue = [];
+        const nextQueue = new Set();
         for (const node of queue) {
             for (const [v, w] of graph[node]){
                 const maxV = Math.max(intensities[node], w)
                 if (intensities[v] > maxV){
                     intensities[v] = maxV;
-                    nextQueue.push(v)
+                    nextQueue.add(v)
                 }   
             }
         }
